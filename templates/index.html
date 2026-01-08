@@ -8,6 +8,7 @@
 
     <title>Weebs. Chat</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="shortcut icon" href="{% static 'logo.png' %}" type="image/x-icon">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -37,7 +38,7 @@
           </p>
         </div>
         <div class="flex gap-[1em]">
-          <p>Welcome, {{ user.username }}</p>
+          <p>Welcome, <span class="text-[var(--color-secondary)]">{{ user.username }}</span></p>
         </div>
       </nav>
 
@@ -57,7 +58,7 @@
               class="flex items-center gap-[1em] hover:bg-[var(--color-secondary)] hover:text-white p-2 w-full"
             >
               <i class="fa-solid fa-comment"></i>
-              <a href="{% url 'index' %}">Your Rooms</a>
+              <a href="{% url 'index' %}"><span class="text-[var(--color-secondary)]">{{user.username}}</span> Rooms</a>
             </p>
 
             <p
@@ -85,7 +86,7 @@
                 <div
                   class=" message flex w-fit px-4 py-2 items-center border border-[var(--color-secondary)] text-white"
                 >
-                  <p class=" name font-bold text-[.9em]">Johh</p>
+                  <p class=" name font-bold text-[.9em]">{{user.username}}</p>
                   <p>
                     hello there my name is John Doe Lorem ipsum dolor sit amet
                     consectetur adipisicing elit. Cumque error obcaecati nisi

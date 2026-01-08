@@ -6,6 +6,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'logo.png' %}"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <link
       rel="stylesheet"
@@ -42,7 +47,11 @@
         </h2>
         <h3 class="text-2xl font-bold text-center text-white">Login</h3>
 
-        <form action="" method="post" class="flex flex-col gap-[1em] w-[80%]">
+        <form
+          action="login"
+          method="POST"
+          class="flex flex-col gap-[1em] w-[80%]"
+        >
           {% csrf_token %}
           <input
             type="text"
@@ -63,9 +72,7 @@
             Login
           </button>
         </form>
-        <p>
-          Don't have an account? <a href="{% url 'register' %}">Register</a>
-        </p>
+        <p>Don't have an account? <a href="/register">Register</a></p>
       </div>
     </section>
   </body>
