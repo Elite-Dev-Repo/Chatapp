@@ -1,0 +1,70 @@
+:root {
+  --color-primary: #161616;
+  --color-secondary: #007bff;
+}
+
+body {
+  width: 100vw;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  outline: none;
+  overflow: hidden;
+}
+
+.bounce {
+  animation: bounce 1s infinite;
+}
+
+input:focus {
+  border-color: var(--color-secondary);
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.cont {
+  width: 100%;
+  padding-inline: 20px;
+}
+
+.messages-cont {
+  border: 1px solid var(--color-secondary);
+  overflow-y: scroll;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+.messages-cont::-webkit-scrollbar {
+  width: 10px;
+}
+
+.messages-cont::-webkit-scrollbar-track {
+  background: var(--color-primary);
+}
+
+.messages-cont::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border-radius: 5px;
+}
+
+.message {
+  border-radius: 100px 30px;
+  gap: 1em;
+
+  .name {
+    border-radius: 100px 30px;
+    background-color: var(--color-secondary);
+    padding: 0.5em;
+  }
+}
