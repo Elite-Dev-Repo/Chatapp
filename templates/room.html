@@ -38,11 +38,15 @@
         <div class="user-info">
           <p>Welcome, <span class="username">{{ user.username }}</span></p>
         </div>
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </nav>
     </header>
 
     <div class="main-container">
-      <aside>
+      <div class="sidebar-overlay" id="sidebarOverlay"></div>
+      <aside id="sidebar">
         <div class="sidebar-nav">
           <a href="{% url 'room' %}" class="nav-item">
             <i class="fa-solid fa-comment"></i>
@@ -93,7 +97,7 @@
       </main>
     </div>
 
-    <script>
+    <!-- <script>
       const roomName = "{{ roomname }}";
       const messageContainer = document.querySelector(".messages-container");
 
@@ -127,6 +131,19 @@
 
       // Also run once immediately on page load
       fetchMessages();
-    </script>
+
+      // Mobile Menu Logic
+      const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("sidebarOverlay");
+
+      function toggleMenu() {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      }
+
+      menuToggle.addEventListener("click", toggleMenu);
+      overlay.addEventListener("click", toggleMenu);
+    </script> -->
   </body>
 </html>

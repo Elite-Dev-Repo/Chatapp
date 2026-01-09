@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-@fz)z@*14hgduu179+l&=)(f1ennctwd(*j^%qrb!8f0%8cixq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,21 +78,21 @@ WSGI_APPLICATION = 'Chatapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'railway',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'CJKFdIBVVhzWPbHLLDXaOKjhIFHEccRw',
-    #     'HOST': 'tramway.proxy.rlwy.net',
-    #     'PORT': '11449',
-    # }
+# DATABASES = {
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.postgresql',
+#     #     'NAME': 'railway',
+#     #     'USER': 'postgres',
+#     #     'PASSWORD': 'CJKFdIBVVhzWPbHLLDXaOKjhIFHEccRw',
+#     #     'HOST': 'tramway.proxy.rlwy.net',
+#     #     'PORT': '11449',
+#     # }
 
-    'default': dj_database_url.config(
-        default='postgresql://postgres.uwpbeniwfksyszqfrbiq:iwa1921post..@aws-1-eu-west-1.pooler.supabase.com:6543/postgres',
-        conn_max_age=600,
-    )
-}
+#     'default': dj_database_url.config(
+#         default='postgresql://postgres.uwpbeniwfksyszqfrbiq:iwa1921post..@aws-1-eu-west-1.pooler.supabase.com:6543/postgres',
+#         conn_max_age=600,
+#     )
+# }
 
 DATABASES = {
     'default': {
@@ -141,6 +142,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_URL = 'login'
