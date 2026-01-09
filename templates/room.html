@@ -48,7 +48,6 @@
             <i class="fa-solid fa-comment"></i>
             <span>ChatRooms</span>
           </a>
-
           <a href="{% url 'index' %}" class="nav-item">
             <i class="fa-solid fa-user"></i>
             <span
@@ -70,49 +69,26 @@
 
       <main>
         <div class="room-header">
-          <h3>WEEBS <span>Room</span></h3>
+          <h3>{{roomname}} <span>Room</span></h3>
         </div>
 
         <div class="messages-container">
+          {% for msg in messages reversed %}
           <div class="message">
-            <p class="name">{{ user.username }}</p>
-            <p>
-              Hello there I am Elite Dev. A full stack developer from Nigeria. I
-              am here to help you with any questions you may have.
-            </p>
+            <p class="name">{{ msg.sender.username }}</p>
+            <p>{{ msg.content }}</p>
+            <small style="color: gray">{{ msg.created_at|date:"H:i" }}</small>
           </div>
-          <div class="message">
-            <p class="name">CodeNinja</p>
-            <p>How can I start chatting? ☹️</p>
-          </div>
-          <div class="message">
-            <p class="name">DevQueen</p>
-            <p>
-              Simple, click on the
-              <span class="gradient-text">ChatRooms</span> then click on any
-              room to join. 😊
-            </p>
-          </div>
-          <div class="message">
-            <p class="name">Imisioluwa</p>
-            <p>Alright, thank you! ❤️</p>
-          </div>
+          {% empty %}
+          <p class="text-center">No messages yet...</p>
+          {% endfor %}
         </div>
 
-        <form class="message-form" action="" method="">
-          <input
-            type="text"
-            readonly
-            placeholder="Feature is Under Construction. Wait a while "
-            name="message"
-            maxlength="50"
-            required
-          />
-
-          <a href="{% url 'room' %}"
-            ><button type="button" class="send-btn" disabled>
-              Send <i class="fa-solid fa-paper-plane"></i></button
-          ></a>
+        <form class="message-form" action="{% url 'send' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="room_id" value="{{ room.id }}" />
+          <input type="text" name="message" required />
+          <button type="submit" class="send-btn">Send</button>
         </form>
       </main>
     </div>

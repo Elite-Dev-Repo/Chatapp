@@ -7,5 +7,9 @@ urlpatterns = [
     path('login', views.loginUser, name='login'),
     path('logout', views.logoutUser, name='logout'),
     path('register', views.registerUser, name='register'),
-    path('chatrooms', views.chatRooms, name='chatrooms')
+    path('room', views.room, name='room'), # This is your room list
+    path('createroom', views.createRoom, name='createroom'),
+    path('roomchat/<str:roomname>', views.roomchat, name='roomchat'),
+    path('checkview', views.checkview, name='checkview'),
+    path('send', views.send, name='send'),
 ]

@@ -44,11 +44,10 @@
     <div class="main-container">
       <aside>
         <div class="sidebar-nav">
-          <a href="{% url 'room' %}" class="nav-item">
+          <a href="room" class="nav-item">
             <i class="fa-solid fa-comment"></i>
             <span>ChatRooms</span>
           </a>
-
           <a href="{% url 'index' %}" class="nav-item">
             <i class="fa-solid fa-user"></i>
             <span
@@ -56,7 +55,7 @@
               Rooms</span
             >
           </a>
-          <a href="{% url 'createroom' %}" class="nav-item">
+          <a href="{% url 'index' %}" class="nav-item">
             <i class="fa-solid fa-plus"></i>
             <span>Create Room</span>
           </a>
@@ -70,50 +69,25 @@
 
       <main>
         <div class="room-header">
-          <h3>WEEBS <span>Room</span></h3>
+          <h3>Create New <span>Room</span></h3>
         </div>
 
         <div class="messages-container">
-          <div class="message">
-            <p class="name">{{ user.username }}</p>
-            <p>
-              Hello there I am Elite Dev. A full stack developer from Nigeria. I
-              am here to help you with any questions you may have.
-            </p>
-          </div>
-          <div class="message">
-            <p class="name">CodeNinja</p>
-            <p>How can I start chatting? ☹️</p>
-          </div>
-          <div class="message">
-            <p class="name">DevQueen</p>
-            <p>
-              Simple, click on the
-              <span class="gradient-text">ChatRooms</span> then click on any
-              room to join. 😊
-            </p>
-          </div>
-          <div class="message">
-            <p class="name">Imisioluwa</p>
-            <p>Alright, thank you! ❤️</p>
-          </div>
+          <form action="checkview" method="POST" style="display: flex">
+            {% csrf_token %}
+            <input
+              class="room-input"
+              type="text"
+              placeholder="Room name"
+              name="room_name"
+              maxlength="50"
+              required
+            />
+            <button type="submit" class="send-btn">
+              Create <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
         </div>
-
-        <form class="message-form" action="" method="">
-          <input
-            type="text"
-            readonly
-            placeholder="Feature is Under Construction. Wait a while "
-            name="message"
-            maxlength="50"
-            required
-          />
-
-          <a href="{% url 'room' %}"
-            ><button type="button" class="send-btn" disabled>
-              Send <i class="fa-solid fa-paper-plane"></i></button
-          ></a>
-        </form>
       </main>
     </div>
   </body>

@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from .models import Room, Message
 # Create your views here.
 
 @login_required(login_url='login')
@@ -53,5 +54,46 @@ def registerUser(request):
     else:
         return render(request, 'register.html')
 
-def chatRooms(request):
-    return render(request, 'chatrooms.html')
+
+def room(request):
+    rooms = Room.objects.all()
+    return render(request, 'chatrooms.html', {'rooms': rooms})
+
+
+
+def createRoom(request):   
+    return render(request, 'createroom.html')
+
+# This handles the actual chat room
+def roomchat(request, roomname):
+    room_details = get_object_or_404(Room, name=roomname)
+    messages = Message.objects.filter(room=room_details).order_by('created_at')
+    return render(request, 'room.html', {
+        'room': room_details,
+        'messages': messages,
+        'roomname': roomname
+    })
+
+def checkview(request):
+    room_name = request.POST['room_name']
+    if Room.objects.filter(name=room_name).exists():
+        return redirect('roomchat', roomname=room_name) # Fix redirect here
+    else:
+        new_room = Room.objects.create(name=room_name, creator=request.user)
+        new_room.save()
+        return redirect('roomchat', roomname=room_name)
+
+# ADD THIS: This view was missing but is called by your form
+def send(request):
+    if request.method == 'POST':
+        message_content = request.POST.get('message')
+        room_id = request.POST.get('room_id')
+        room_obj = Room.objects.get(id=room_id)
+        
+        # Save using Foreign Keys
+        Message.objects.create(
+            content=message_content,
+            room=room_obj,
+            sender=request.user
+        )
+        return redirect('roomchat', roomname=room_obj.name)

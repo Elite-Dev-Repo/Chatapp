@@ -1,22 +1,120 @@
-{% load static%}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
+
+    <title>Weebs. Chat</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <link
       rel="shortcut icon"
       href="{% static 'logo.png' %}"
       type="image/x-icon"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="{% url 'index' %}"
+            >Weeb. <span>Chat <i class="fa-regular fa-message"></i></span
+          ></a>
+        </div>
+        <div class="user-info">
+          <p>Welcome, <span class="username">{{ user.username }}</span></p>
+        </div>
+      </nav>
+    </header>
+
+    <div class="main-container">
+      <aside>
+        <div class="sidebar-nav">
+          <a href="{% url 'room' %}" class="nav-item">
+            <i class="fa-solid fa-comment"></i>
+            <span>ChatRooms</span>
+          </a>
+          <a href="{% url 'index' %}" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span
+              ><span class="gradient-text">{{ user.username }}</span>
+              Rooms</span
+            >
+          </a>
+          <a href="{% url 'createroom' %}" class="nav-item">
+            <i class="fa-solid fa-plus"></i>
+            <span>Create Room</span>
+          </a>
+        </div>
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </aside>
+
+      <main>
+        <div class="room-header">
+          <h3>ROOM <span>LIST</span></h3>
+          <p
+            style="
+              color: white;
+              font-size: 12px;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            "
+          >
+            Click on a room to join
+          </p>
+        </div>
+
+        <div class="messages-container">
+          <div class="room-list">
+            <ol>
+              {% for room in rooms %}
+              <li class="room-item">
+                <a
+                  href="{% url 'roomchat' room.name %}"
+                  style="text-decoration: none; color: white"
+                >
+                  {{room.name}}
+                </a>
+              </li>
+              {% endfor %}
+            </ol>
+          </div>
+        </div>
+
+        <form class="message-form" action="" method="post">
+          {% csrf_token %}
+          <input
+            type="text"
+            placeholder="Feature is Under Construction. Wait a while "
+            name="message"
+            maxlength="50"
+            readonly
+            required
+          />
+          <button type="submit" class="send-btn">
+            Search
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </main>
+    </div>
+  </body>
 </html>
