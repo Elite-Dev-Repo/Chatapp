@@ -556,6 +556,7 @@ main {
     overflow-x: hidden;
     width: 100vw;
     max-width: 100vw;
+    height: 70vh;
     padding: 0;
   }
   .message {
