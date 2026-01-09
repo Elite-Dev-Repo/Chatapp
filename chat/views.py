@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 # Create your views here.
 
 @login_required(login_url='login')
@@ -18,6 +19,7 @@ def loginUser(request):
             login(request, user)
             return redirect('index')
         else:
+            messages.error(request, 'Invalid username or password')
             return render(request, 'login.html')
     return render(request, 'login.html')
 
@@ -33,13 +35,23 @@ def registerUser(request):
         password = request.POST['password']
         password2 = request.POST['password2']
         email = request.POST['email']
-        if password != password2:
-            return render(request, 'register.html')
-        user = User.objects.create_user(username=username, password=password, email=email)
-        user.save()
-        login(request, user)
-        return redirect('index')
-    return render(request, 'register.html')
+        if password == password2:
+            if User.objects.filter(email=email).exists():
+                messages.info(request, 'Email already exists')
+                return redirect('register')
+            elif User.objects.filter(username=username).exists():
+                messages.info(request, 'Username already exists')
+                return redirect('register')
+            else:
+                user = User.objects.create_user(username=username, password=password, email=email)
+                user.save()
+                login(request, user) 
+                return redirect('index')
+        else:
+            messages.info(request, 'Passwords do not match')
+            return redirect('register')
+    else:
+        return render(request, 'register.html')
 
 def chatRooms(request):
     return render(request, 'chatrooms.html')
