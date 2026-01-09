@@ -479,6 +479,10 @@ main {
 
 /* Tablet and Mobile (Merged for cleaner breakpoints) */
 @media (max-width: 768px) {
+  body {
+    max-height: 100vh;
+    overflow: hidden;
+  }
   /* Header adjustments */
   header nav {
     padding: 0.5rem 1rem;
@@ -486,7 +490,7 @@ main {
   }
 
   .main-container {
-    height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
   }
 
   /* Show Hamburger */
@@ -543,13 +547,78 @@ main {
   }
 
   /* Chat Bubble adjustments for mobile */
+  .messages-container {
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100vw;
+    padding: 0;
+  }
   .message {
     max-width: 90%;
-    padding: 0.8rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: none;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .name {
+    padding-inline: 0.9em;
+    padding-block: 0.5em;
+    border-radius: 50px;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-accent) 100%
+    );
+    color: white;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  }
+
+  .message:hover {
+    border-color: transparent;
+    border: none;
+    box-shadow: none;
+    transform: none;
   }
 
   .message-form button {
-    padding: 1rem; /* Smaller button */
+    padding: 1rem;
+    width: 100%;
+    /* Smaller button */
+  }
+
+  .message-form button {
+    i {
+      display: none;
+    }
+  }
+  .message-form button:hover {
+    box-shadow: none;
+    transform: none;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-accent) 100%
+    );
+  }
+
+  .room-input {
+    width: 70%;
+    flex: none;
+  }
+  .send-btn {
+    width: 20%;
+    font-size: 0.8em;
+    padding-inline: 1em;
+    padding-block: 1em;
+    border-radius: 5px;
+    i {
+      display: none;
+    }
   }
 
   .room-header h3 {
