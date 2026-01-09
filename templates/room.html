@@ -77,7 +77,7 @@
         </div>
 
         <div class="messages-container">
-          {% for msg in messages %}
+          {% for msg in messages reversed %}
           <div class="message">
             <p class="name">{{ msg.sender.username }}</p>
             <p>{{ msg.content }}</p>
