@@ -8,7 +8,11 @@
 
     <title>Weebs. Chat</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
-    <link rel="shortcut icon" href="{% static 'logo.png' %}" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="{% static 'logo.png' %}"
+      type="image/x-icon"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -19,116 +23,98 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <header>
-      <nav
-        class="border-b-[1px] border-[var(--color-secondary)] cont flex justify-around items-center h-[80px]"
-      >
-        <div class="">
-          <p class="text-2xl font-bold text-white">
-            <a href="{% url 'index' %}"
-              >Weeb.
-              <span class="text-blue-500"
-                >Chat <i class="fa-regular fa-message"></i></span
-            ></a>
-          </p>
+      <nav>
+        <div class="logo">
+          <a href="{% url 'index' %}"
+            >Weeb. <span>Chat <i class="fa-regular fa-message"></i></span
+          ></a>
         </div>
-        <div class="flex gap-[1em]">
-          <p>Welcome, <span class="text-[var(--color-secondary)]">{{ user.username }}</span></p>
+        <div class="user-info">
+          <p>Welcome, <span class="username">{{ user.username }}</span></p>
         </div>
       </nav>
-
-      <div class="h-[calc(100vh-80px)] grid grid-cols-[1fr_3fr]">
-        <aside
-          class="flex flex-col gap-[1em] border-r-[1px] border-[var(--color-secondary)] p-[1em] items-center justify-between"
-        >
-          <div class="flex flex-col items-center gap-[1em] w-full">
-            <p
-              class="flex items-center gap-[1em] hover:bg-[var(--color-secondary)] hover:text-white p-2 w-full"
-            >
-              <i class="fa-solid fa-comment"></i>
-              <a href="{% url 'chatrooms' %}">ChatRooms</a>
-            </p>
-
-            <p
-              class="flex items-center gap-[1em] hover:bg-[var(--color-secondary)] hover:text-white p-2 w-full"
-            >
-              <i class="fa-solid fa-comment"></i>
-              <a href="{% url 'index' %}"><span class="text-[var(--color-secondary)]">{{user.username}}</span> Rooms</a>
-            </p>
-
-            <p
-              class="flex items-center gap-[1em] hover:bg-[var(--color-secondary)] hover:text-white p-2 w-full"
-            >
-              <i class="fa-solid fa-comment"></i>
-              <a href="{% url 'index' %}">Create Room</a>
-            </p>
-          </div>
-
-          <div class="flex items-center gap-[1em] mb-[2em]">
-            <a href="{% url 'logout' %}"
-              ><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a
-            >
-          </div>
-        </aside>
-        <main class="relative flex flex-col gap-[1em]">
-          <div class="flex flex-col gap-[1em]">
-            <h3 class="text-2xl font-bold text-center mb-[1em] mt-[1em]">
-              Programmers <span class="text-blue-500">Room</span>
-            </h3>
-
-            <div class="flex flex-col gap-[1em]">
-              <div class="messages-cont">
-                <div
-                  class=" message flex w-fit px-4 py-2 items-center border border-[var(--color-secondary)] text-white"
-                >
-                  <p class=" name font-bold text-[.9em]">{{user.username}}</p>
-                  <p>
-                    hello there my name is John Doe Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Cumque error obcaecati nisi
-                    quisquam explicabo harum recusandae consequatur facilis quis
-                    possimus praesentium, reiciendis repellat vel eaque numquam
-                    magnam? Quis est veritatis doloribus, ratione sunt fuga,
-                    alias facere nesciunt enim ex iusto ullam officia ut, hic sed
-                    libero laborum? Temporibus, obcaecati mollitia.
-                  </p>
-                </div>
-
-               
-               
-      
-
-              <form
-                action=""
-                class="absolute bottom-[2em] w-full flex gap-[1em] items-center justify-center"
-                method="post"
-              >
-                {% csrf_token %}
-                <input
-                  type="text"
-                  placeholder="Type your message here..."
-                  name="message"
-                  id=""
-                  max="50"
-                  class="outline-none w-[60%] p-4 border border-gray-300 rounded bg-transparent"
-                />
-                <button
-                  type="submit"
-                  class="p-2 rounded h-full px-4 py-2 font-semibold bg-[var(--color-secondary)] text-white"
-                >
-                  Send
-                </button>
-              </form>
-            </div>
-          </div>
-        </main>
-      </div>
     </header>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <div class="main-container">
+      <aside>
+        <div class="sidebar-nav">
+          <a href="{% url 'chatrooms' %}" class="nav-item">
+            <i class="fa-solid fa-comment"></i>
+            <span>ChatRooms</span>
+          </a>
+          <a href="{% url 'index' %}" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span
+              ><span class="gradient-text">{{ user.username }}</span>
+              Rooms</span
+            >
+          </a>
+          <a href="{% url 'index' %}" class="nav-item">
+            <i class="fa-solid fa-plus"></i>
+            <span>Create Room</span>
+          </a>
+        </div>
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </aside>
+
+      <main>
+        <div class="room-header">
+          <h3>Programmers <span>Room</span></h3>
+        </div>
+
+        <div class="messages-container">
+          <div class="message">
+            <p class="name">{{ user.username }}</p>
+            <p>
+              hello there my name is John Doe Lorem ipsum dolor sit amet
+              consectetur adipisicing elit. Cumque error obcaecati nisi quisquam
+              explicabo harum recusandae consequatur facilis quis possimus
+              praesentium, reiciendis repellat vel eaque numquam magnam? Quis
+              est veritatis doloribus, ratione sunt fuga, alias facere nesciunt
+              enim ex iusto ullam officia ut, hic sed libero laborum?
+              Temporibus, obcaecati mollitia.
+            </p>
+          </div>
+          <div class="message">
+            <p class="name">CodeNinja</p>
+            <p>
+              Hey everyone! Just finished debugging that nasty issue. Turns out
+              it was a simple typo all along 😅
+            </p>
+          </div>
+          <div class="message">
+            <p class="name">DevQueen</p>
+            <p>
+              Nice! Those are always the hardest to find. Anyone up for a coding
+              challenge tonight?
+            </p>
+          </div>
+        </div>
+
+        <form class="message-form" action="" method="post">
+          {% csrf_token %}
+          <input
+            type="text"
+            placeholder="Type your message here..."
+            name="message"
+            maxlength="50"
+            required
+          />
+          <button type="submit" class="send-btn">
+            Send <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </main>
+    </div>
   </body>
 </html>
