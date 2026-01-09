@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .models import Room, Message
+from django.http import JsonResponse
 # Create your views here.
 
 @login_required(login_url='login')
@@ -97,3 +98,18 @@ def send(request):
             sender=request.user
         )
         return redirect('roomchat', roomname=room_obj.name)
+
+
+def getMessages(request, roomname):
+    room_details = get_object_or_404(Room, name=roomname)
+    messages = Message.objects.filter(room=room_details).order_by('created_at')
+    
+    # Convert message list to a list of dictionaries for JSON
+    message_list = []
+    for msg in messages:
+        message_list.append({
+            "sender": msg.sender.username,
+            "content": msg.content,
+            "created_at": msg.created_at.strftime("%H:%M"),
+        })
+    return JsonResponse({"messages": message_list})

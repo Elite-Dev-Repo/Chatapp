@@ -73,7 +73,7 @@
         </div>
 
         <div class="messages-container">
-          {% for msg in messages reversed %}
+          {% for msg in messages %}
           <div class="message">
             <p class="name">{{ msg.sender.username }}</p>
             <p>{{ msg.content }}</p>
@@ -92,5 +92,41 @@
         </form>
       </main>
     </div>
+
+    <script>
+      const roomName = "{{ roomname }}";
+      const messageContainer = document.querySelector(".messages-container");
+
+      function fetchMessages() {
+        fetch(`/getMessages/${roomName}/`)
+          .then((response) => response.json())
+          .then((data) => {
+            const messageContainer = document.querySelector(
+              ".messages-container"
+            );
+            messageContainer.innerHTML = "";
+
+            data.messages.forEach((msg) => {
+              const messageDiv = `
+                        <div class="message">
+                            <p class="name">${msg.sender}</p>
+                            <p>${msg.content}</p>
+                            <small style="color: gray">${msg.created_at}</small>
+                        </div>
+                    `;
+              messageContainer.innerHTML += messageDiv;
+            });
+
+            // AUTO-SCROLL TO BOTTOM
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      setInterval(fetchMessages, 1000);
+
+      // Also run once immediately on page load
+      fetchMessages();
+    </script>
   </body>
 </html>

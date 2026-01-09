@@ -460,3 +460,310 @@ main {
   transition: all 0.3s ease;
   flex: 1;
 }
+
+/* Add these responsive media queries to your existing styles.css */
+
+/* Tablet devices (768px and below) */
+@media (max-width: 768px) {
+  /* Header adjustments */
+  header nav {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .user-info p {
+    font-size: 0.9rem;
+  }
+
+  /* Main container - stack sidebar and main content */
+  .main-container {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+    position: relative;
+    height: auto;
+    min-height: auto;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .sidebar-nav .nav-item {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    min-width: auto;
+  }
+
+  .sidebar-nav .nav-item i {
+    margin-right: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  .sidebar-nav .nav-item span {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .logout-btn {
+    position: relative;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+
+  /* Main content */
+  main {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .room-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .messages-container {
+    max-height: 50vh;
+  }
+
+  /* Message form */
+  .message-form {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .message-form input {
+    width: 100%;
+  }
+
+  .message-form button,
+  .send-btn {
+    width: 100%;
+  }
+
+  /* Room list */
+  .room-list ol {
+    padding-left: 1.5rem;
+  }
+
+  .room-item {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+
+  /* Create room form */
+  .messages-container form {
+    flex-direction: column !important;
+    gap: 0.5rem;
+  }
+
+  .room-input {
+    width: 100% !important;
+  }
+}
+
+/* Mobile devices (480px and below) */
+@media (max-width: 480px) {
+  /* Logo adjustments */
+  .logo a {
+    font-size: 1.25rem;
+  }
+
+  /* Header */
+  header nav {
+    padding: 0.75rem;
+  }
+
+  .user-info p {
+    font-size: 0.8rem;
+  }
+
+  .username {
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  /* Sidebar */
+  .sidebar-nav .nav-item span {
+    font-size: 0.65rem;
+  }
+
+  .sidebar-nav .nav-item i {
+    font-size: 1rem;
+  }
+
+  .logout-btn {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  /* Main content */
+  main {
+    padding: 0.5rem;
+  }
+
+  .room-header {
+    padding: 0.75rem;
+  }
+
+  .room-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .room-header p {
+    font-size: 0.7rem !important;
+  }
+
+  /* Messages */
+  .message {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .message .name {
+    font-size: 0.85rem;
+  }
+
+  .message small {
+    font-size: 0.7rem;
+  }
+
+  .messages-container {
+    max-height: 45vh;
+  }
+
+  /* Forms */
+  .message-form input {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  .message-form button {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  /* Login/Register pages */
+  section.flex {
+    padding: 1rem;
+  }
+
+  section.flex > div {
+    width: 100% !important;
+    max-width: 400px;
+    height: auto !important;
+    min-height: 400px;
+    padding: 1.5rem !important;
+  }
+
+  section.flex h2.logo {
+    font-size: 1.5rem;
+  }
+
+  section.flex h3 {
+    font-size: 1.25rem !important;
+  }
+
+  section.flex form {
+    width: 100% !important;
+  }
+
+  section.flex input {
+    font-size: 0.85rem !important;
+  }
+
+  section.flex button {
+    font-size: 0.85rem !important;
+  }
+
+  section.flex p {
+    font-size: 0.85rem;
+  }
+
+  /* Hide decorative icons on very small screens */
+  section.flex i.icon {
+    display: none;
+  }
+
+  /* Room list */
+  .room-list {
+    padding: 0.5rem;
+  }
+
+  .room-item {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Very small devices (360px and below) */
+@media (max-width: 360px) {
+  .logo a {
+    font-size: 1rem;
+  }
+
+  .room-header h3 {
+    font-size: 1rem;
+  }
+
+  .message {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .sidebar-nav .nav-item {
+    padding: 0.35rem;
+  }
+
+  .sidebar-nav .nav-item span {
+    font-size: 0.6rem;
+  }
+}
+
+/* Landscape orientation fixes */
+@media (max-height: 600px) and (orientation: landscape) {
+  .messages-container {
+    max-height: 35vh;
+  }
+
+  .sidebar-nav {
+    padding: 0.5rem 0;
+  }
+
+  main {
+    padding: 0.5rem;
+  }
+
+  .room-header {
+    padding: 0.5rem;
+  }
+}
+
+/* Ensure touch targets are adequate on mobile */
+@media (max-width: 768px) {
+  button,
+  .nav-item,
+  .logout-btn,
+  a.room-item {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Improve scrolling on mobile */
+@media (max-width: 768px) {
+  .messages-container {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+}

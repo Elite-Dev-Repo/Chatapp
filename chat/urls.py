@@ -12,4 +12,5 @@ urlpatterns = [
     path('roomchat/<str:roomname>', views.roomchat, name='roomchat'),
     path('checkview', views.checkview, name='checkview'),
     path('send', views.send, name='send'),
+    path('getMessages/<str:roomname>/', views.getMessages, name='getMessages'),
 ]
