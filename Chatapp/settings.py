@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Chatapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# DATABASES = {
+DATABASES = {
 #     # 'default': {
 #     #     'ENGINE': 'django.db.backends.postgresql',
 #     #     'NAME': 'railway',
@@ -88,11 +88,11 @@ WSGI_APPLICATION = 'Chatapp.wsgi.application'
 #     #     'PORT': '11449',
 #     # }
 
-#     'default': dj_database_url.config(
-#         default='postgresql://postgres.uwpbeniwfksyszqfrbiq:iwa1921post..@aws-1-eu-west-1.pooler.supabase.com:6543/postgres',
-#         conn_max_age=600,
-#     )
-# }
+    'default': dj_database_url.config(
+        default='postgresql://postgres.uwpbeniwfksyszqfrbiq:iwa1921post..@aws-1-eu-west-1.pooler.supabase.com:6543/postgres',
+        conn_max_age=600,
+    )
+}
 
 DATABASES = {
     'default': {
